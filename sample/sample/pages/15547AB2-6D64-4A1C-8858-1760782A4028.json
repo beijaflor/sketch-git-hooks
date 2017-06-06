@@ -197,7 +197,7 @@
                   "red": 0.592
                 },
                 "fillType": 0,
-                "isEnabled": true,
+                "isEnabled": false,
                 "position": 1,
                 "thickness": 1
               }
@@ -209,9 +209,9 @@
                 "color": {
                   "_class": "color",
                   "alpha": 1,
-                  "blue": 0.847,
-                  "green": 0.847,
-                  "red": 0.847
+                  "blue": 0.7707367541003144,
+                  "green": 0.7707367541003144,
+                  "red": 0.9311224489795918
                 },
                 "fillType": 0,
                 "isEnabled": true,
