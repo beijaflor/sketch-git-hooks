@@ -1,0 +1,31 @@
+{
+  "app": "com.bohemiancoding.sketch3",
+  "appVersion": "44.1",
+  "autosaved": 0,
+  "build": 41455,
+  "commit": "10b2b021ddaac63eb3f52ce0b42edfb625ca194b",
+  "created": {
+    "app": "com.bohemiancoding.sketch3",
+    "appVersion": "44.1",
+    "build": 41455,
+    "commit": "10b2b021ddaac63eb3f52ce0b42edfb625ca194b",
+    "variant": "NONAPPSTORE",
+    "version": 91
+  },
+  "fonts": [],
+  "pagesAndArtboards": {
+    "15547AB2-6D64-4A1C-8858-1760782A4028": {
+      "artboards": {
+        "0797B13C-953D-4FF8-B246-B928EF97A133": {
+          "name": "iPhone 7"
+        }
+      },
+      "name": "Page 1"
+    }
+  },
+  "saveHistory": [
+    "NONAPPSTORE.41455"
+  ],
+  "variant": "NONAPPSTORE",
+  "version": 91
+}
