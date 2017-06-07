@@ -1,0 +1,36 @@
+#!/bin/sh
+
+function echoLog () {
+  echo [POST-CHECKOUT HOOK] $@
+}
+
+function getAllSketchFiles() {
+  find $(git rev-parse --show-toplevel) -type d -name '.*' -prune -o -type f -print | grep -G \.sketch$ | grep -vE .-[0-9a-fA-F]{7}\.sketch$
+}
+
+function extractSketchFile() {
+  local filename=`basename $1`
+  local filebase=${filename%.sketch}
+  local outfile=$filebase-$(git rev-parse --short HEAD).sketch
+  local basedir=`dirname $1`
+  local sketchdir=$basedir/$filebase
+
+  if [ ! -d $sketchdir ]; then
+    return 1
+  fi
+
+  if [ ! -e $basedir/$outfile ]; then
+    (cd $sketchdir && zip -r - * ) > $basedir/$outfile
+  else
+    echoLog ${basedir#$git_root}/$outfile is already exist
+  fi
+
+  return 0
+}
+
+git_root=$(git rev-parse --show-toplevel)
+
+files=`getAllSketchFiles`
+for file in $files; do
+  extractSketchFile $file
+done
