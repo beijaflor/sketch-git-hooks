@@ -1,0 +1,26 @@
+#!/bin/sh
+
+function echoLog () {
+  echo [PRE-COMMIT HOOK] $@
+}
+
+function getAllSketchFiles() {
+  find $(git rev-parse --show-toplevel) -type d -name '.*' -prune -o -type f -print | grep -G \.sketch$ | grep -vE .-[0-9a-fA-F]{7}\.sketch$
+}
+
+function expandSketchFile() {
+  local filename=`basename $1`
+  local filebase=${filename%.sketch}
+  local outfile=$filebase-$(git rev-parse --short HEAD).sketch
+  local basedir=`dirname $1`
+  local sketchdir=$basedir/$filebase
+
+  return 0
+}
+
+git_root=$(git rev-parse --show-toplevel)
+
+files=`getAllSketchFiles`
+for file in $files; do
+  expandSketchFile $file
+done

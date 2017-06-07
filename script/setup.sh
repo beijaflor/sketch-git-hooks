@@ -1,13 +1,21 @@
-#!/bin/sh
-if [ -d '.git' ]; then
-  if [ -f '.git/hooks/post-checkout' ]; then
-    mv .git/hooks/post-checkout script/post-checkout.old
-  fi
+#!/bin/sh -eu
+registerHook () {
+  if [ -d '.git' ]; then
+    if [ -f ".git/hooks/$1" ]; then
+      mv ".git/hooks/$1" "script/$1.old"
+    fi
 
-  if [ -L '.git/hooks/post-checkout' ]; then
-    rm .git/hooks/post-checkout
-  fi
+    if [ -L ".git/hooks/$1" ]; then
+      rm ".git/hooks/$1"
+    fi
 
-  ls -s ../../post-checkout .git/hooks/post-checkout
-  chmod -x script/post-checkout
-fi
+    ln -s "../../script/$1" ".git/hooks/$1"
+    chmod +x "script/$1"
+  fi
+}
+
+hooks="post-checkout pre-commit"
+
+for hook in $hooks; do
+  registerHook $hook
+done
